@@ -11,7 +11,8 @@ conexion=sqlite3.connect("jptdatabase.db")
 consulta=conexion.cursor()
 
 #consultar
-df =pd.read_sql_query("SELECT * FROM modbus_table",conexion)
+df =pd.read_sql_query("SELECT * FROM sqlite_sequence",conexion)
+
 #se crea el excel
 df.to_excel('jptdatabase.xlsx', index=False)
 print(df)
@@ -21,7 +22,7 @@ print("excel creado")
 datos=pd.read_excel('jptdatabase.xlsx')
 df=pd.DataFrame(datos)
 
-df.groupby('id')['id'].sum().plot(kind='barh',legend='Reverse')
+df.groupby('name')['seq'].sum().plot(kind='barh',legend='Reverse')
 plt.xlabel('otros datos')
 print("grafica creada")
 
